@@ -19,8 +19,14 @@ public class TestTableController {
     }
 
     @GetMapping("/list")
-    public List<TestTable> personSave() {
-        System.out.println(testTableRepository.findAll().get(0));
+    public List<TestTable> testList() {
+        TestTable table = TestTable.builder()
+                .title("빌드 타이틀")
+                .name("이름")
+                .build();
+
+        testTableRepository.save(table);
+        System.out.println(testTableRepository.findAll());
         return testTableRepository.findAll();
     }
 }
