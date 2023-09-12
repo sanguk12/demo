@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-//@RequestMapping(value = "/api")
+@RequestMapping(value = "/api")
 public class TestTableController {
 
     private final TestTableRepository testTableRepository;
@@ -30,7 +30,7 @@ public class TestTableController {
         return testTableRepository.findAll();
     }
 
-    @GetMapping("/api/hello")
+    @GetMapping("/hello")
     public String test() {
         return "Hello, world!";
     }
