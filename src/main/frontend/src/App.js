@@ -29,15 +29,22 @@ function Copyright() {
       </Typography>
   );
 }
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 const defaultTheme = createTheme();
+
 export default function App() {
+    const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     const [hello, setHello] = useState('')
+    // api 호출
     useEffect(() => {
         axios.get('/api/hello')
             .then(response => setHello(response.data))
             .catch(error => console.log(error))
     }, []);
+
+    const goToSign = () => {
+        console.log("test")
+    }
+
     return (
         <ThemeProvider theme={defaultTheme}>
             <CssBaseline />
@@ -110,7 +117,9 @@ export default function App() {
                                         </Typography>
                                     </CardContent>
                                     <CardActions>
-                                        <Button size="small">View</Button>
+                                        <Link href="/view">
+                                            <Button size="small" onClick={goToSign}>View</Button>
+                                        </Link>
                                         <Button size="small">Edit</Button>
                                     </CardActions>
                                 </Card>
