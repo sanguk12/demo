@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import Button from '@mui/material/Button';
+import Link from "@mui/material/Link";
 
 function Index() {
     const [hello, setHello] = useState('')
@@ -13,7 +14,9 @@ function Index() {
 
     return (
         <div>
-            <Button variant="contained">{ hello }</Button>
+            <Link href="/">
+                <Button variant="contained">{ hello }</Button>
+            </Link>
         </div>
     );
 }
