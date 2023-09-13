@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import Button from '@mui/material/Button';
 
-function App() {
+function Index() {
     const [hello, setHello] = useState('')
 
     useEffect(() => {
@@ -18,4 +18,4 @@ function App() {
     );
 }
 
-export default App;
+export default Index;
