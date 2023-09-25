@@ -5,7 +5,7 @@ import Index from './pages/view/index';
 import Header from './pages/components/Header';
 import Footer from './pages/components/Footer';
 // import Board from './pagres/Board';
-
+import styles from './App.css';
 
 export default function App() {
     return (

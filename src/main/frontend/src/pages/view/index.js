@@ -8,7 +8,6 @@ import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import { useNavigate, useLocation } from "react-router-dom";
 
-
 import {createTheme, ThemeProvider} from "@mui/material/styles";
 
 const defaultTheme = createTheme();
@@ -61,10 +60,11 @@ function Index() {
                             spacing={2}
                             justifyContent="center"
                         >
-                            <Button variant="contained" onClick={() => goToMain()}>Main call to action</Button>
                         </Stack>
                     </Container>
                 </Box>
+                <img src={hello.image} className='App-image' alt='React'/>
+                <Button className='main-button' variant="contained" onClick={() => goToMain()}>Main call to action</Button>
             </main>
             {/* Footer */}
             {/* End footer */}
