@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import Button from '@mui/material/Button';
-import AppBar from '@mui/material/AppBar';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -10,12 +9,11 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { NavLink, useLocation, useNavigate  } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const defaultTheme = createTheme();
@@ -44,7 +42,8 @@ export default function App() {
     const goToEdit = (id) => {
         Swal.fire({
             icon: "warning",
-            title: "해당 기능은 아직 개발 중 입니다."
+            title: "해당 기능은 아직 개발 중 입니다.",
+            text : "언젠간 만들겠지?"
         })
     };
     const test1 = () => {
