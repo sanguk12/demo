@@ -4,8 +4,10 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import CameraIcon from "@mui/icons-material/PhotoCamera";
 import Typography from "@mui/material/Typography";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
+    const navigate = useNavigate();
     const [hello, setHello] = useState('')
     // api 호출
     useEffect(() => {
@@ -16,7 +18,7 @@ function Header() {
     return (
         <AppBar position="relative">
             <Toolbar>
-                <CameraIcon sx={{ mr: 2 }} />
+                <CameraIcon sx={{ mr: 2 }} onClick={() => navigate('/')} style={{cursor : "pointer"}}/>
                 <Typography variant="h6" color="inherit" noWrap>
                     { hello }
                 </Typography>

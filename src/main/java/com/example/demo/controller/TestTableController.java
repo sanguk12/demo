@@ -37,6 +37,6 @@ public class TestTableController {
 
     @GetMapping("/hello")
     public String test() {
-        return "Hello, world!";
+        return "Hello, React Studying!";
     }
 }

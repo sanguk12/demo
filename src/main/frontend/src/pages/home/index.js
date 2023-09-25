@@ -39,8 +39,11 @@ export default function App() {
 
     const goToSign = (id) => {
         navigate("/view", {state : {id : id}})
-    }
+    };
 
+    const goToEdit = (id) => {
+      alert("해당 기능은 아직 개발 중 입니다.")
+    };
 
     return (
         <ThemeProvider theme={defaultTheme}>
@@ -73,8 +76,8 @@ export default function App() {
                             spacing={2}
                             justifyContent="center"
                         >
-                            <Button variant="contained">Main call to action</Button>
-                            <Button variant="outlined">Secondary action</Button>
+                            <Button variant="contained">모양만 있음</Button>
+                            <Button variant="outlined">기능없음</Button>
                         </Stack>
                     </Container>
                 </Box>
@@ -106,7 +109,7 @@ export default function App() {
                                         <Link>
                                             <Button size="small" onClick={() => goToSign(card.id)}>View</Button>
                                         </Link>
-                                        <Button size="small">Edit</Button>
+                                        <Button size="small" onClick={() => goToEdit(card.id)}>Edit</Button>
                                     </CardActions>
                                 </Card>
                             </Grid>
