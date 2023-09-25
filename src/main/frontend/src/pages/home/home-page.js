@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import Button from '@mui/material/Button';
-import CameraIcon from '@mui/icons-material/PhotoCamera';
 import AppBar from '@mui/material/AppBar';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -16,23 +15,34 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useNavigate  } from "react-router-dom";
+import {Route} from "@mui/icons-material";
 
 const defaultTheme = createTheme();
 
 export default function App() {
-    const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    const navigate = useNavigate();
     const [hello, setHello] = useState('')
+    const [list, setList] = useState([])
+    useEffect(() => {
+        axios.get('/api/list')
+            .then(response => setList(response.data))
+            .catch(error => console.log(error))
+    }, []);
+
+    const cards = [1,2,3,4,5,6,7,8,9];
     // api 호출
     useEffect(() => {
-        axios.get('/api/hello')
+        axios.get('/api/category/get')
             .then(response => setHello(response.data))
             .catch(error => console.log(error))
     }, []);
 
-    const goToSign = () => {
-        console.log("test")
+    const goToSign = (id) => {
+        navigate("/view", {state : {id : id}})
+        // history.push("/view/"+id);
     }
+
 
     return (
         <ThemeProvider theme={defaultTheme}>
@@ -54,12 +64,10 @@ export default function App() {
                             color="text.primary"
                             gutterBottom
                         >
-                            { hello }
+                            { hello.title }
                         </Typography>
                         <Typography variant="h5" align="center" color="text.secondary" paragraph>
-                            Something short and leading about the collection below—its contents,
-                            the creator, etc. Make it short and sweet, but not too short so folks
-                            don&apos;t simply skip over it entirely.
+                            { hello.discription }
                         </Typography>
                         <Stack
                             sx={{ pt: 4 }}
@@ -75,8 +83,8 @@ export default function App() {
                 <Container sx={{ py: 8 }} maxWidth="md">
                     {/* End hero unit */}
                     <Grid container spacing={4}>
-                        {cards.map((card) => (
-                            <Grid item key={card} xs={12} sm={6} md={4}>
+                        {list.map((card) => (
+                            <Grid item key={card.id} xs={12} sm={6} md={4}>
                                 <Card
                                     sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
                                 >
@@ -90,16 +98,15 @@ export default function App() {
                                     />
                                     <CardContent sx={{ flexGrow: 1 }}>
                                         <Typography gutterBottom variant="h5" component="h2">
-                                            Heading
+                                            { card.title }
                                         </Typography>
                                         <Typography>
-                                            This is a media card. You can use this section to describe the
-                                            content.
+                                            { card.discription }
                                         </Typography>
                                     </CardContent>
                                     <CardActions>
-                                        <Link href="/view">
-                                            <Button size="small" onClick={goToSign}>View</Button>
+                                        <Link>
+                                            <Button size="small" onClick={() => goToSign(card.id)}>View</Button>
                                         </Link>
                                         <Button size="small">Edit</Button>
                                     </CardActions>
