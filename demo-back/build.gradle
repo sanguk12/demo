@@ -36,15 +36,3 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 
-// project를 정의합니다. 공통으로 사용되는 core 모듈을 추가해 줍니다.
-project(':demo-back') {
-    dependencies {
-        implementation 'org.springframework.boot:spring-boot-starter-web'
-    }
-}
-
-project(':demo-front') {
-    dependencies {
-
-    }
-}
