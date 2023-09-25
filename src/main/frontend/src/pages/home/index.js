@@ -30,7 +30,6 @@ export default function App() {
             .catch(error => console.log(error))
     }, []);
 
-    const cards = [1,2,3,4,5,6,7,8,9];
     // api 호출
     useEffect(() => {
         axios.get('/api/category/get')
@@ -40,7 +39,6 @@ export default function App() {
 
     const goToSign = (id) => {
         navigate("/view", {state : {id : id}})
-        // history.push("/view/"+id);
     }
 
 

@@ -22,10 +22,10 @@ public class TestTableController {
 
     @GetMapping("/list")
     public List<TestTable> testList() {
-        TestTable table = TestTable.builder()
-                .title("빌드 타이틀")
-                .name("이름")
-                .build();
+//        TestTable table = TestTable.builder()
+//                .title("빌드 타이틀")
+//                .name("이름")
+//                .build();
 
         return testTableRepository.findAll();
     }
