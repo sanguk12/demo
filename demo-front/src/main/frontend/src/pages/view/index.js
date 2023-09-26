@@ -1,11 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
-import Button from '@mui/material/Button';
-import CssBaseline from "@mui/material/CssBaseline";
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
-import Stack from "@mui/material/Stack";
+import { Stack, Typography, Container, Box, CssBaseline, Button } from "@mui/material";
 import { useNavigate, useLocation } from "react-router-dom";
 
 import {createTheme, ThemeProvider} from "@mui/material/styles";
