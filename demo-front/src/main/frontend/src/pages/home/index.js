@@ -25,6 +25,7 @@ export default function App() {
     const [page, setPage] = useState(1);
     const [hello, setHello] = useState('')
     const [list, setList] = useState()
+
     const handleChange = async (event, value) => {
         if (value != undefined) {
             pageIndex = value-1;
@@ -38,7 +39,6 @@ export default function App() {
         handleChange().then(r => setPage(r));
     }, []);
 
-    console.log(page, "111")
     // api 호출
     useEffect(function () {
         axios.get('/api/category/get')
@@ -75,7 +75,6 @@ export default function App() {
         <ThemeProvider theme={defaultTheme}>
             <CssBaseline/>
             <main>
-                {/* Hero unit */}
                 <Box
                     sx={{
                         bgcolor: 'background.paper',
@@ -142,16 +141,14 @@ export default function App() {
                         ))}
                     </Grid>
                 </Container>
-                {list != undefined ?
-                    < Pagination  count={list.totalPages} page={page} onChange={handleChange}  sx={{
+                { list != undefined &&
+                    <Pagination count={list.totalPages} page={page} onChange={handleChange} sx={{
                         display: "flex",
                         justifyContent: "center",
                         padding: "15px 0",
-                    }}/> : null
+                    }}/>
                 }
             </main>
-            {/* Footer */}
-            {/* End footer */}
         </ThemeProvider>
     );
 }

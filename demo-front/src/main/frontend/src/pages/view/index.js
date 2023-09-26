@@ -26,14 +26,12 @@ function Index() {
 
     const goToMain = () => {
         navigate("/")
-        // history.push("/view/"+id);
     }
 
     return (
         <ThemeProvider theme={defaultTheme}>
             <CssBaseline />
             <main>
-                {/* Hero unit */}
                 <Box
                     sx={{
                         bgcolor: 'background.paper',
@@ -66,8 +64,6 @@ function Index() {
                 <img src={hello.image} className='App-image' alt='React'/>
                 <Button className='main-button' variant="contained" onClick={() => goToMain()}>Main call to action</Button>
             </main>
-            {/* Footer */}
-            {/* End footer */}
         </ThemeProvider>
     );
 }
