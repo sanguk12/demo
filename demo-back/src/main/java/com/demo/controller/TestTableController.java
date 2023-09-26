@@ -2,10 +2,9 @@ package com.demo.controller;
 
 import com.demo.entity.TestTable;
 import com.demo.repository.TestTableRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,13 +20,14 @@ public class TestTableController {
     }
 
     @GetMapping("/list")
-    public List<TestTable> testList() {
+    public Page<TestTable> testList(@RequestParam(required = false, value = "page") int pageIndex) {
 //        TestTable table = TestTable.builder()
 //                .title("빌드 타이틀")
 //                .name("이름")
 //                .build();
+        PageRequest pageRequest = PageRequest.of(pageIndex, 6);
 
-        return testTableRepository.findAll();
+        return testTableRepository.findAll(pageRequest);
     }
 
     @GetMapping("/get/{id}")

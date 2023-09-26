@@ -15,54 +15,65 @@ import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import {Pagination} from "@mui/material";
 
 const defaultTheme = createTheme();
 
 export default function App() {
     const navigate = useNavigate();
+    let [pageIndex] = useState(0);
+    const [page, setPage] = useState(1);
     const [hello, setHello] = useState('')
-    const [list, setList] = useState([])
-    useEffect(() => {
-        axios.get('/api/list')
-            .then(response => setList(response.data))
+    const [list, setList] = useState()
+    const handleChange = async (event, value) => {
+        if (value != undefined) {
+            pageIndex = value-1;
+        }
+        const result = await axios.get('/api/list?page=' + pageIndex)
             .catch(error => console.log(error))
+        setList(result.data);
+    };
+
+    useEffect (() => {
+        handleChange().then(r => setPage(r));
     }, []);
 
+    console.log(page, "111")
     // api 호출
-    useEffect(() => {
+    useEffect(function () {
         axios.get('/api/category/get')
             .then(response => setHello(response.data))
             .catch(error => console.log(error))
     }, []);
 
     const goToSign = (id) => {
-        navigate("/view", {state : {id : id}})
+        navigate("/view", {state: {id: id}})
     };
 
     const goToEdit = (id) => {
         Swal.fire({
             icon: "warning",
             title: "해당 기능은 아직 개발 중 입니다.",
-            text : "언젠간 만들겠지?"
+            text: "언젠간 만들겠지?"
         })
     };
     const test1 = () => {
         Swal.fire({
             imageUrl: "/images/nun2.jpg",
             title: "더넌2",
-            text : "9월 27일 수요일 개봉"
+            text: "9월 27일 수요일 개봉"
         })
     }
     const test2 = () => {
         Swal.fire({
             imageUrl: "/images/zz.jpg",
             title: "사나 : 저주의 아이",
-            text : "10월 4일 개봉"
+            text: "10월 4일 개봉"
         })
     }
     return (
         <ThemeProvider theme={defaultTheme}>
-            <CssBaseline />
+            <CssBaseline/>
             <main>
                 {/* Hero unit */}
                 <Box
@@ -80,13 +91,13 @@ export default function App() {
                             color="text.primary"
                             gutterBottom
                         >
-                            { hello.title }
+                            {hello.title}
                         </Typography>
                         <Typography variant="h5" align="center" color="text.secondary" paragraph>
-                            { hello.discription }
+                            {hello.discription}
                         </Typography>
                         <Stack
-                            sx={{ pt: 4 }}
+                            sx={{pt: 4}}
                             direction="row"
                             spacing={2}
                             justifyContent="center"
@@ -96,10 +107,10 @@ export default function App() {
                         </Stack>
                     </Container>
                 </Box>
-                <Container sx={{ py: 8 }} maxWidth="md">
+                <Container sx={{py: 8}} maxWidth="md">
                     {/* End hero unit */}
                     <Grid container spacing={4}>
-                        {list.map((card) => (
+                        {list != undefined && list.content.map((card) => (
                             <Grid item key={card.id} xs={12} sm={6} md={4}>
                                 <Card
                                     sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
@@ -131,6 +142,13 @@ export default function App() {
                         ))}
                     </Grid>
                 </Container>
+                {list != undefined ?
+                    < Pagination  count={list.totalPages} page={page} onChange={handleChange}  sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        padding: "15px 0",
+                    }}/> : null
+                }
             </main>
             {/* Footer */}
             {/* End footer */}
